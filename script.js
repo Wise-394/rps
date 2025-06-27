@@ -109,7 +109,7 @@ function logRound(resultStr) {
 }
 function anounceWinner(winnerStr) {
     winner.textContent = winnerStr
-    playAgainBtn.style.display = "block"
+    playAgainBtn.style.visibility = "visible"
 }
 
 function playAgain() {
@@ -118,7 +118,7 @@ function playAgain() {
     computerScoreLabel.textContent = "0"
     humanScoreLabel.textContent = "0"
     winner.textContent = ""
-    playAgainBtn.style.display = "none"
+    playAgainBtn.style.visibility = "hidden"
     p.textContent = ""
 }
 
