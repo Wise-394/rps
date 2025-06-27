@@ -7,37 +7,59 @@ const winner = document.querySelector("#winner")
 const playAgainBtn = document.querySelector("#play-again")
 const ul = document.querySelector("ul")
 const footer = document.querySelector(".footer")
-
+const humanChoiceLogo = document.querySelector("#human-choice-logo")
+const computerChoiceLogo = document.querySelector("#computer-choice-logo")
 const p = document.createElement("p")
 
 
-rockButton.addEventListener("click", () => playRound("rock", getComputerChoice()))
-paperButton.addEventListener("click", () => playRound("paper", getComputerChoice()))
-scissorsButton.addEventListener("click", () => playRound("scissors", getComputerChoice()))
+rockButton.addEventListener("click", () => playRound(getHumanChoice("rock"), getComputerChoice()))
+paperButton.addEventListener("click", () => playRound(getHumanChoice("paper"), getComputerChoice()))
+scissorsButton.addEventListener("click", () => playRound(getHumanChoice("scissors"), getComputerChoice()))
 
 let humanScore = 0
 let computerScore = 0
 
 function getComputerChoice() {
     const randomInt = Math.floor(Math.random() * 3);
+    let choice = ""
     switch (randomInt) {
         case 0:
-            return "rock"
+            choice = "rock"
+            computerChoiceLogo.textContent = "✊"
+            break
         case 1:
-            return "paper"
+            choice = "paper"
+            computerChoiceLogo.textContent = "✋"
+            break
         case 2:
-            return "scissors"
+            choice = "scissors"
+            computerChoiceLogo.textContent = "✌️"
+            break
         default:
             return "error"
     }
+    return choice
 }
 
-function getHumanChoice() {
-    return prompt("Rock Paper Scissors?").toLowerCase()
+function getHumanChoice(choice) {
+    switch(choice){
+        case "rock":
+            humanChoiceLogo.textContent = "✊"
+            break
+        case "paper":
+            humanChoiceLogo.textContent = "✋"
+            break
+        case "scissors":
+            humanChoiceLogo.textContent = "✌️"
+            break
+    }
+    return choice
 }
 
 
 function playRound(humanChoice, computerChoice) {
+    if (computerScore >= 5 || humanScore >= 5) return
+
     if (humanChoice === computerChoice) {
         logRound("Its a tie!")
     }
@@ -93,11 +115,11 @@ function anounceWinner(winnerStr) {
 function playAgain() {
     humanScore = 0
     computerScore = 0
-    computerScoreLabel.textContent = ""
-    humanScoreLabel.textContent = ""
+    computerScoreLabel.textContent = "0"
+    humanScoreLabel.textContent = "0"
     winner.textContent = ""
     playAgainBtn.style.display = "none"
     p.textContent = ""
 }
 
-playAgainBtn.addEventListener("click", ()=> playAgain())
+playAgainBtn.addEventListener("click", () => playAgain())
