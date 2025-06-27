@@ -9,7 +9,7 @@ const ul = document.querySelector("ul")
 const footer = document.querySelector(".footer")
 const humanChoiceLogo = document.querySelector("#human-choice-logo")
 const computerChoiceLogo = document.querySelector("#computer-choice-logo")
-const p = document.createElement("p")
+const p = document.querySelector("#log")
 
 
 rockButton.addEventListener("click", () => playRound(getHumanChoice("rock"), getComputerChoice()))
@@ -105,7 +105,6 @@ function changeScoreLabel() {
 }
 function logRound(resultStr) {
     p.textContent = resultStr
-    footer.appendChild(p)
 }
 function anounceWinner(winnerStr) {
     winner.textContent = winnerStr

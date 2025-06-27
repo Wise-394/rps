@@ -16,6 +16,9 @@ body {
     background-color: var(--surface-dark);
 
 }
+a{
+    color: white;
+}
 
 .header {
     background-color: var(--primary);
