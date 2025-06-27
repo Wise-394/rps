@@ -1,3 +1,23 @@
+const rockButton = document.querySelector("#rock")
+const paperButton = document.querySelector("#paper")
+const scissorsButton = document.querySelector("#scissors")
+const computerScoreLabel = document.querySelector("#computer-score")
+const humanScoreLabel = document.querySelector("#human-score")
+const winner = document.querySelector("#winner")
+const playAgainBtn = document.querySelector("#play-again")
+const ul = document.querySelector("ul")
+const footer = document.querySelector(".footer")
+
+const p = document.createElement("p")
+
+
+rockButton.addEventListener("click", () => playRound("rock", getComputerChoice()))
+paperButton.addEventListener("click", () => playRound("paper", getComputerChoice()))
+scissorsButton.addEventListener("click", () => playRound("scissors", getComputerChoice()))
+
+let humanScore = 0
+let computerScore = 0
+
 function getComputerChoice() {
     const randomInt = Math.floor(Math.random() * 3);
     switch (randomInt) {
@@ -16,56 +36,68 @@ function getHumanChoice() {
     return prompt("Rock Paper Scissors?").toLowerCase()
 }
 
-function playGame() {
-    let humanScore = 0
-    let computerScore = 0
-    function playRound(humanChoice, computerChoice) {
-        if (humanChoice === computerChoice) {
-            console.log("TIE!")
-        }
 
-        else if (humanChoice === "rock") {
-            if (computerChoice === "scissors") {
-                console.log("You win! Rock beats Scissors")
-                humanScore++
-            } else {
-                console.log("You lose! Rock cant beat paper")
-                computerScore++
-            }
-        }
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        logRound("Its a tie!")
+    }
 
-        else if (humanChoice === "paper") {
-            if (computerChoice === "rock") {
-                console.log("You win! Paper beats rock")
-                humanScore++
-            } else {
-                console.log("You lose! Paper cant beat scissor")
-                computerScore++
-            }
-        }
-
-        else if (humanChoice === "scissors") {
-            if (computerChoice === "paper") {
-                console.log("You win! Scissors beats paper")
-                humanScore++
-            } else {
-                console.log("You lose! Scissor cant beat rock")
-                computerScore++
-            }
+    else if (humanChoice === "rock") {
+        if (computerChoice === "scissors") {
+            logRound("You win! Rock beats Scissors")
+            humanScore++
+        } else {
+            logRound("You lose! Rock cant beat paper")
+            computerScore++
         }
     }
 
-    for(let i = 0; i < 5; i++){
-        const humanSelection = getHumanChoice()
-        const computerSelection = getComputerChoice()
-        playRound(humanSelection,computerSelection)
+    else if (humanChoice === "paper") {
+        if (computerChoice === "rock") {
+            logRound("You win! Paper beats rock")
+            humanScore++
+        } else {
+            logRound("You lose! Paper cant beat scissor")
+            computerScore++
+        }
     }
-    if(humanScore === computerScore){
-        console.log("Tie!")
-    } else if (humanScore > computerScore) {
-        console.log("You win!")
-    } else {
-        console.log("You lose!")
+
+    else if (humanChoice === "scissors") {
+        if (computerChoice === "paper") {
+            logRound("You win! Scissors beats paper")
+            humanScore++
+        } else {
+            logRound("You lose! Scissor cant beat rock")
+            computerScore++
+        }
+    }
+    changeScoreLabel()
+    if (computerScore >= 5 || humanScore >= 5) {
+        anounceWinner(humanScore >= 5 ? "You are the winner" : "You lose")
+        return
     }
 }
-playGame()
+function changeScoreLabel() {
+    computerScoreLabel.textContent = computerScore
+    humanScoreLabel.textContent = humanScore
+}
+function logRound(resultStr) {
+    p.textContent = resultStr
+    footer.appendChild(p)
+}
+function anounceWinner(winnerStr) {
+    winner.textContent = winnerStr
+    playAgainBtn.style.display = "block"
+}
+
+function playAgain() {
+    humanScore = 0
+    computerScore = 0
+    computerScoreLabel.textContent = ""
+    humanScoreLabel.textContent = ""
+    winner.textContent = ""
+    playAgainBtn.style.display = "none"
+    p.textContent = ""
+}
+
+playAgainBtn.addEventListener("click", ()=> playAgain())

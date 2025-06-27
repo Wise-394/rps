@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
-<script src = "script.js"> </script>
+<script src="script.js" defer> </script>
+
 <body>
-    
+    <div class="header">
+        <h1>Rock Paper Scissors!</h1>
+        <button id = "play-again">Play Again</button>
+    </div>
+    <!-- container -->
+    <div class="container">
+
+        <!-- player container -->
+        <div class="player subcontainer">
+            <h2>Human Score:</h2>
+            <h2 id="human-score">0</h2>
+            <div class="container-button">
+                <button id="rock" class="button">🪨 Rock</button>
+                <button id="paper" class="button">📃 Paper</button>
+                <button id="scissors" class="button">✂️ Scissors</button>
+            </div>
+        </div>
+        <!-- computer container -->
+        <div class="computer subcontainer">
+            <div>
+                <h2>Computer Score:</h2>
+                <h2 id="computer-score">0</h2>
+                <div class="computer-choice"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p id="winner"></p>
+    </div>
+
 </body>
+
 </html>
